@@ -4,8 +4,9 @@ import time
 from azure.iot.device import IoTHubDeviceClient, Message
 
 # The device connection string to authenticate the device with your IoT hub.
-# Using the Azure CLI:
-CONNECTION_STRING = 'HostName=OsmoseReversa2.azure-devices.net;DeviceId=MyNodeDevice;SharedAccessKey=psFmI8nauWNaYsl13cyvD7r8PNiif+2WvUPVVVqlE0k='
+# Using the Azure CLI (shell):
+#az iot hub device-identity show-connection-string --hub-name {YourIoTHubName} --device-id {MyNodeDevice} --output table
+CONNECTION_STRING = 'HostName=HubOR.azure-devices.net;DeviceId=rasp_or;SharedAccessKey=a+8VNhUqp5Jrqq1TVpm5cGre+0VHaJuntS1us/qevok='
 
 # Define the JSON message to send to IoT Hub.
 
@@ -25,7 +26,8 @@ def iothub_client_telemetry_sample_run():
       
 
         while True:
-            arq = open('/home/pi/Desktop/dadosPlc/TESTE_2.log', 'r')
+            #PLC's path to access the logfile
+            arq = open('/usr/Log/TESTE_1', 'r')
             texto = arq.readline()
             linha2 = arq.readline()
             
@@ -38,7 +40,8 @@ def iothub_client_telemetry_sample_run():
             print( "Sending message: {}".format(message) )
             client.send_message(message)
             print ( "Message successfully sent" )
-            time.sleep(5)
+            #Time sleep 60seconds - Project decided to grab data each 1 min (60 sec). Change here if want pick more or less data
+            time.sleep(60)
 
     except KeyboardInterrupt:
         print ( "IoTHubClient sample stopped" )

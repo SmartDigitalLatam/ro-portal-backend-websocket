@@ -77,6 +77,7 @@ const INDEX = "./index.html";
 
 const EventHubReader = require("./event-hub-reader");
 
+//String generated  in azure shell with code --> az iot hub show-connection-string --name {YourIoTHubName} --policy-name service --output table
 const iotHubConnectionString =
   "HostName=HubOR.azure-devices.net;SharedAccessKeyName=service;SharedAccessKey=d5/5QXY1fciq7SvnKn+mkE6rflCtl5LloXeEVHQSVKk=";
 const eventHubConsumerGroup = "buckman";
